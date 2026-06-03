@@ -13,7 +13,6 @@
 
     <div class="bg-primary py-5 text-center text-white">
         <h1 class="fw-bold">{{ $title }}</h1>
-        <p class="mb-0">Sistem Manajemen Data Customer</p>
     </div>
 
     <div class="container my-5">

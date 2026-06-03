@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -11,7 +12,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('customers.index', [
+            'title' => 'Data Customer',
+            'customers' => Customer::all()
+        ]);
     }
 
     /**
@@ -19,7 +23,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create', [
+            'title' => 'Tambah Customer'
+        ]);
     }
 
     /**
@@ -27,7 +33,33 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'nama_customer' => 'required|max:255',
+                'alamat' => 'required',
+                'nomor_telepon' => 'required',
+                'umur' => 'required|numeric',
+                'status' => 'required',
+            ],
+            [
+                'nama_customer.required' => 'Nama customer tidak boleh kosong',
+                'nama_customer.max' => 'Nama customer maksimal 255 karakter',
+
+                'alamat.required' => 'Alamat tidak boleh kosong',
+
+                'nomor_telepon.required' => 'Nomor telepon tidak boleh kosong',
+
+                'umur.required' => 'Umur tidak boleh kosong',
+                'umur.numeric' => 'Umur harus berupa angka',
+
+                'status.required' => 'Status harus dipilih',
+            ]
+        );
+
+        Customer::create($validated);
+
+        return to_route('customers.index')
+            ->withSuccess('Data customer berhasil ditambahkan');
     }
 
     /**

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_petugas');
-            $table->string('nip');
+            $table->string('nama_customer');
             $table->text('alamat');
-            $table->string('no_hp');
-            $table->string('email');
+            $table->string('nomor_telepon');
+            $table->integer('umur');
+            $table->enum('status', ['Member', 'Non Member']);
             $table->timestamps();
         });
     }
