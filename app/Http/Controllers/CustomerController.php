@@ -13,7 +13,7 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customers.index', [
-            'title' => 'Data Customer',
+            'title' => 'Customer',
             'customers' => Customer::all()
         ]);
     }

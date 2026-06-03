@@ -10,6 +10,24 @@
 </head>
 
 <body>
+    {{-- navigasi --}}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">UNITAMA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ route('customers.index') }}">Costumer</a>
+          <a class="nav-link active" href="{{ route('category.index') }}">Category</a>
+          <a class="nav-link active" href="{{ route('product.index') }}">Product</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <div class="bg-primary py-5 text-center text-white">
         <h1 class="fw-bold">{{ $title }}</h1>

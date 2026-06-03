@@ -10,11 +10,24 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $keyword = $request->search;
 
+        $categorys = Category::latest();
+
+        if ($keyword) {
+            $categorys->where('kode_kategori', 'like', '%' . $keyword . '%')
+                ->orWhere('nama_kategori', 'like', '%' . $keyword . '%');
+        }
+
+        $categorys = $categorys->paginate(3);
+
+        return view('category.index', [
+            'title' => 'Category',
+            'categorys' => $categorys,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -11,15 +11,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Product::class;
+
     public function definition(): array
     {
         return [
             'category_id' => Category::inRandomOrder()->first()->id,
+
             'kode_produk' => 'PRD' . fake()->unique()->numberBetween(1000, 9999),
 
             'nama_produk' => fake()->randomElement([
