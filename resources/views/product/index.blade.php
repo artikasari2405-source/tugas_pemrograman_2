@@ -47,9 +47,9 @@
 
         <thead class="table-primary">
             <tr>
-                <th>No</th>
-                <th>Kode Produk</th>
-                <th>Nama Produk</th>
+                <th>id</th>
+                <th>category_id</th>
+                <th>Nama_Produk</th>
                 <th>Kategori</th>
                 <th>Harga</th>
                 <th>Stok</th>

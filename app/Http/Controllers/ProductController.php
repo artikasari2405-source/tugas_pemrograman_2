@@ -42,7 +42,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create', [
+            'title' => 'Tambah Produk',
+            'categorys' => Category::all(),
+        ]);
     }
 
     /**
@@ -50,7 +53,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'kode_produk' => 'required|unique:products,kode_produk',
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+        ]);
+
+        Product::create($validated);
+
+        return redirect()
+            ->route('product.index')
+            ->with('success', 'Data produk berhasil ditambahkan.');
     }
 
     /**

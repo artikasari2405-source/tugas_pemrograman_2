@@ -19,7 +19,7 @@
     <table class="table table-bordered border-primary">
         <thead class="table-primary">
             <tr>
-                <th>No</th>
+                <th>id</th>
                 <th>Kode Kategori</th>
                 <th>Nama Kategori</th>
                 <th>Deskripsi</th>
