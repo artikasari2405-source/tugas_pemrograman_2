@@ -11,3 +11,5 @@ Route::post('/customer/store', [CustomerController::class, 'store'])->name('cust
 Route::get('/customers/{customers}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 Route::put('/customers/{customers}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{customers}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+Route::resource('kategori',CustomerController::class);
