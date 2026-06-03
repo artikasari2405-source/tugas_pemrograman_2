@@ -115,8 +115,9 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Customer $customers)
     {
-        //
+        $customers->delete($customers);
+        return to_route('customers.index')->withSuccess('Data berhasil dihapus');
     }
 }

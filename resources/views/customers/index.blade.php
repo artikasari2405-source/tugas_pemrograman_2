@@ -31,7 +31,17 @@
                     <td>{{ $item->nomor_telepon }}</td>
                     <td>{{ $item->umur }}</td>
                     <td>{{ $item->status }}</td>
-                    <td><a class="btn btn-warning btn-sm" href="{{ route('customers.edit', $item) }}" role="button">Edit</a></td>
+                    <td style="white-space: nowrap;">
+                        <a class="btn btn-warning btn-sm" href="{{ route('customers.edit', $item) }}"role="button">Edit</a>                    
+                            <form action="{{ route('customers.destroy', $item) }}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Anda yakin?')">
+                                Delete
+                            </button>
+                        </form>
                 </tr>
             @endforeach
         </tbody>
