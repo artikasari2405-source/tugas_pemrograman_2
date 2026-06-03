@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,11 +11,29 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $products = Product::with('category')->latest();
+
+        // Search
+        $search = $request->search;
+
+        if ($search) {
+            $products->where(function ($query) use ($search) {
+                $query->where('kode_produk', 'like', '%' . $search . '%')
+                    ->orWhere('nama_produk', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Filter Kategori
+        if ($request->category_id) {
+            $products->where('category_id', $request->category_id);
+        }
+
         return view('product.index', [
-            'title' => 'Product',
-            'products' => Product::all()
+            'title' => 'Data Produk',
+            'products' => $products->paginate(5)->withQueryString(),
+            'categorys' => Category::all(),
         ]);
     }
 

@@ -12,9 +12,6 @@
         <input type="text" name="search" value="{{ request('search') }}"
                placeholder="Cari kategori..." class="form-control w-25">
         <button type="submit" class="btn btn-success">Search</button>
-        @if(request('search'))
-            <a href="{{ route('category.index') }}" class="btn btn-danger">Reset</a>
-        @endif
     </form>
 
     <a class="btn btn-primary mb-3" href="{{ route('category.create') }}" role="button">Create</a>
