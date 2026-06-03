@@ -73,7 +73,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product->load('category');
+
+        return view('product.show', [
+            'title' => 'Detail Produk',
+            'product' => $product,
+        ]);
     }
 
     /**
