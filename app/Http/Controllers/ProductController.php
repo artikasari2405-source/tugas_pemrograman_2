@@ -81,7 +81,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit', [
+            'title' => 'Edit Produk',
+            'product' => $product,
+            'categorys' => Category::all(),
+        ]);
     }
 
     /**
@@ -89,7 +93,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'kode_produk' => 'required|unique:products,kode_produk,' . $product->id,
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+        ]);
+
+        $product->update($validated);
+
+        return redirect()
+            ->route('product.index')
+            ->with('success', 'Data produk berhasil diperbarui.');
     }
 
     /**
