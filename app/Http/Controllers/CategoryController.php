@@ -33,7 +33,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create', [
+            'title' => 'Tambah Category'
+        ]);
     }
 
     /**
@@ -41,7 +43,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'kode_kategori' => 'required|unique:categories,kode_kategori',
+            'nama_kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        Category::create($validated);
+
+        return redirect()
+            ->route('category.index')
+            ->with('success', 'Data kategori berhasil ditambahkan.');
     }
 
     /**
