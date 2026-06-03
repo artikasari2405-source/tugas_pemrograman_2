@@ -69,7 +69,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', [
+            'title' => 'Edit Category',
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -77,7 +80,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'kode_kategori' => 'required|unique:categories,kode_kategori,' . $category->id,
+            'nama_kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $category->update($validated);
+
+        return redirect()
+            ->route('category.index')
+            ->with('success', 'Data kategori berhasil diperbarui.');
     }
 
     /**
